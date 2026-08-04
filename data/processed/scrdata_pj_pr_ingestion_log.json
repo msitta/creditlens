@@ -1,0 +1,457 @@
+{
+  "uf": "PR",
+  "cliente": "PJ",
+  "months": [
+    {
+      "file": "scrdata_201901.csv",
+      "rows_read": 234174,
+      "rows_kept": 6416
+    },
+    {
+      "file": "scrdata_201902.csv",
+      "rows_read": 234234,
+      "rows_kept": 6411
+    },
+    {
+      "file": "scrdata_201903.csv",
+      "rows_read": 246131,
+      "rows_kept": 6526
+    },
+    {
+      "file": "scrdata_201904.csv",
+      "rows_read": 247839,
+      "rows_kept": 6580
+    },
+    {
+      "file": "scrdata_201905.csv",
+      "rows_read": 249068,
+      "rows_kept": 6583
+    },
+    {
+      "file": "scrdata_201906.csv",
+      "rows_read": 249579,
+      "rows_kept": 6625
+    },
+    {
+      "file": "scrdata_201907.csv",
+      "rows_read": 250564,
+      "rows_kept": 6684
+    },
+    {
+      "file": "scrdata_201908.csv",
+      "rows_read": 250337,
+      "rows_kept": 6610
+    },
+    {
+      "file": "scrdata_201909.csv",
+      "rows_read": 251198,
+      "rows_kept": 6622
+    },
+    {
+      "file": "scrdata_201910.csv",
+      "rows_read": 250567,
+      "rows_kept": 6630
+    },
+    {
+      "file": "scrdata_201911.csv",
+      "rows_read": 250298,
+      "rows_kept": 6630
+    },
+    {
+      "file": "scrdata_201912.csv",
+      "rows_read": 251495,
+      "rows_kept": 6670
+    },
+    {
+      "file": "scrdata_202001.csv",
+      "rows_read": 251521,
+      "rows_kept": 6671
+    },
+    {
+      "file": "scrdata_202002.csv",
+      "rows_read": 251682,
+      "rows_kept": 6678
+    },
+    {
+      "file": "scrdata_202003.csv",
+      "rows_read": 252715,
+      "rows_kept": 6720
+    },
+    {
+      "file": "scrdata_202004.csv",
+      "rows_read": 255403,
+      "rows_kept": 6877
+    },
+    {
+      "file": "scrdata_202005.csv",
+      "rows_read": 257201,
+      "rows_kept": 6974
+    },
+    {
+      "file": "scrdata_202006.csv",
+      "rows_read": 256562,
+      "rows_kept": 7007
+    },
+    {
+      "file": "scrdata_202007.csv",
+      "rows_read": 255931,
+      "rows_kept": 6962
+    },
+    {
+      "file": "scrdata_202008.csv",
+      "rows_read": 255293,
+      "rows_kept": 7018
+    },
+    {
+      "file": "scrdata_202009.csv",
+      "rows_read": 256554,
+      "rows_kept": 6977
+    },
+    {
+      "file": "scrdata_202010.csv",
+      "rows_read": 257772,
+      "rows_kept": 7052
+    },
+    {
+      "file": "scrdata_202011.csv",
+      "rows_read": 259149,
+      "rows_kept": 7024
+    },
+    {
+      "file": "scrdata_202012.csv",
+      "rows_read": 261658,
+      "rows_kept": 7110
+    },
+    {
+      "file": "scrdata_202101.csv",
+      "rows_read": 264398,
+      "rows_kept": 7194
+    },
+    {
+      "file": "scrdata_202102.csv",
+      "rows_read": 265825,
+      "rows_kept": 7202
+    },
+    {
+      "file": "scrdata_202103.csv",
+      "rows_read": 267604,
+      "rows_kept": 7244
+    },
+    {
+      "file": "scrdata_202104.csv",
+      "rows_read": 269364,
+      "rows_kept": 7235
+    },
+    {
+      "file": "scrdata_202105.csv",
+      "rows_read": 270167,
+      "rows_kept": 7220
+    },
+    {
+      "file": "scrdata_202106.csv",
+      "rows_read": 270993,
+      "rows_kept": 7232
+    },
+    {
+      "file": "scrdata_202107.csv",
+      "rows_read": 273576,
+      "rows_kept": 7220
+    },
+    {
+      "file": "scrdata_202108.csv",
+      "rows_read": 275122,
+      "rows_kept": 7287
+    },
+    {
+      "file": "scrdata_202109.csv",
+      "rows_read": 273398,
+      "rows_kept": 7333
+    },
+    {
+      "file": "scrdata_202110.csv",
+      "rows_read": 273851,
+      "rows_kept": 7376
+    },
+    {
+      "file": "scrdata_202111.csv",
+      "rows_read": 276190,
+      "rows_kept": 7458
+    },
+    {
+      "file": "scrdata_202112.csv",
+      "rows_read": 280903,
+      "rows_kept": 7542
+    },
+    {
+      "file": "scrdata_202201.csv",
+      "rows_read": 282191,
+      "rows_kept": 7540
+    },
+    {
+      "file": "scrdata_202202.csv",
+      "rows_read": 286516,
+      "rows_kept": 7660
+    },
+    {
+      "file": "scrdata_202203.csv",
+      "rows_read": 288538,
+      "rows_kept": 7694
+    },
+    {
+      "file": "scrdata_202204.csv",
+      "rows_read": 291108,
+      "rows_kept": 7690
+    },
+    {
+      "file": "scrdata_202205.csv",
+      "rows_read": 292621,
+      "rows_kept": 7741
+    },
+    {
+      "file": "scrdata_202206.csv",
+      "rows_read": 292625,
+      "rows_kept": 7713
+    },
+    {
+      "file": "scrdata_202207.csv",
+      "rows_read": 295257,
+      "rows_kept": 7760
+    },
+    {
+      "file": "scrdata_202208.csv",
+      "rows_read": 296394,
+      "rows_kept": 7791
+    },
+    {
+      "file": "scrdata_202209.csv",
+      "rows_read": 299115,
+      "rows_kept": 7827
+    },
+    {
+      "file": "scrdata_202210.csv",
+      "rows_read": 300581,
+      "rows_kept": 7813
+    },
+    {
+      "file": "scrdata_202211.csv",
+      "rows_read": 301114,
+      "rows_kept": 7869
+    },
+    {
+      "file": "scrdata_202212.csv",
+      "rows_read": 302812,
+      "rows_kept": 7916
+    },
+    {
+      "file": "scrdata_202301.csv",
+      "rows_read": 304261,
+      "rows_kept": 7870
+    },
+    {
+      "file": "scrdata_202302.csv",
+      "rows_read": 305441,
+      "rows_kept": 7886
+    },
+    {
+      "file": "scrdata_202303.csv",
+      "rows_read": 307425,
+      "rows_kept": 7906
+    },
+    {
+      "file": "scrdata_202304.csv",
+      "rows_read": 308091,
+      "rows_kept": 7937
+    },
+    {
+      "file": "scrdata_202305.csv",
+      "rows_read": 307476,
+      "rows_kept": 7930
+    },
+    {
+      "file": "scrdata_202306.csv",
+      "rows_read": 308094,
+      "rows_kept": 7951
+    },
+    {
+      "file": "scrdata_202307.csv",
+      "rows_read": 308201,
+      "rows_kept": 7989
+    },
+    {
+      "file": "scrdata_202308.csv",
+      "rows_read": 308871,
+      "rows_kept": 7983
+    },
+    {
+      "file": "scrdata_202309.csv",
+      "rows_read": 308454,
+      "rows_kept": 7984
+    },
+    {
+      "file": "scrdata_202310.csv",
+      "rows_read": 310640,
+      "rows_kept": 8011
+    },
+    {
+      "file": "scrdata_202311.csv",
+      "rows_read": 312198,
+      "rows_kept": 8091
+    },
+    {
+      "file": "scrdata_202312.csv",
+      "rows_read": 312370,
+      "rows_kept": 8149
+    },
+    {
+      "file": "scrdata_202401.csv",
+      "rows_read": 311692,
+      "rows_kept": 8145
+    },
+    {
+      "file": "scrdata_202402.csv",
+      "rows_read": 312030,
+      "rows_kept": 8205
+    },
+    {
+      "file": "scrdata_202403.csv",
+      "rows_read": 312636,
+      "rows_kept": 8248
+    },
+    {
+      "file": "scrdata_202404.csv",
+      "rows_read": 312358,
+      "rows_kept": 8275
+    },
+    {
+      "file": "scrdata_202405.csv",
+      "rows_read": 313841,
+      "rows_kept": 8285
+    },
+    {
+      "file": "scrdata_202406.csv",
+      "rows_read": 306976,
+      "rows_kept": 8162
+    },
+    {
+      "file": "scrdata_202407.csv",
+      "rows_read": 309515,
+      "rows_kept": 8171
+    },
+    {
+      "file": "scrdata_202408.csv",
+      "rows_read": 309528,
+      "rows_kept": 8204
+    },
+    {
+      "file": "scrdata_202409.csv",
+      "rows_read": 309037,
+      "rows_kept": 8174
+    },
+    {
+      "file": "scrdata_202410.csv",
+      "rows_read": 308777,
+      "rows_kept": 8145
+    },
+    {
+      "file": "scrdata_202411.csv",
+      "rows_read": 308866,
+      "rows_kept": 8164
+    },
+    {
+      "file": "scrdata_202412.csv",
+      "rows_read": 310432,
+      "rows_kept": 8173
+    },
+    {
+      "file": "scrdata_202501.csv",
+      "rows_read": 312839,
+      "rows_kept": 8202
+    },
+    {
+      "file": "scrdata_202502.csv",
+      "rows_read": 313564,
+      "rows_kept": 8183
+    },
+    {
+      "file": "scrdata_202503.csv",
+      "rows_read": 317740,
+      "rows_kept": 8266
+    },
+    {
+      "file": "scrdata_202504.csv",
+      "rows_read": 318875,
+      "rows_kept": 8283
+    },
+    {
+      "file": "scrdata_202505.csv",
+      "rows_read": 322164,
+      "rows_kept": 8287
+    },
+    {
+      "file": "scrdata_202506.csv",
+      "rows_read": 322852,
+      "rows_kept": 8305
+    },
+    {
+      "file": "scrdata_202507.csv",
+      "rows_read": 308078,
+      "rows_kept": 8249
+    },
+    {
+      "file": "scrdata_202508.csv",
+      "rows_read": 309544,
+      "rows_kept": 8204
+    },
+    {
+      "file": "scrdata_202509.csv",
+      "rows_read": 310830,
+      "rows_kept": 8218
+    },
+    {
+      "file": "scrdata_202510.csv",
+      "rows_read": 309193,
+      "rows_kept": 8239
+    },
+    {
+      "file": "scrdata_202511.csv",
+      "rows_read": 308434,
+      "rows_kept": 8226
+    },
+    {
+      "file": "scrdata_202512.csv",
+      "rows_read": 310419,
+      "rows_kept": 8316
+    },
+    {
+      "file": "scrdata_202601.csv",
+      "rows_read": 311506,
+      "rows_kept": 8272
+    },
+    {
+      "file": "scrdata_202602.csv",
+      "rows_read": 314729,
+      "rows_kept": 8355
+    },
+    {
+      "file": "scrdata_202603.csv",
+      "rows_read": 315433,
+      "rows_kept": 8429
+    },
+    {
+      "file": "scrdata_202604.csv",
+      "rows_read": 314025,
+      "rows_kept": 8390
+    },
+    {
+      "file": "scrdata_202605.csv",
+      "rows_read": 315296,
+      "rows_kept": 8386
+    }
+  ],
+  "rows_read": 25589919,
+  "rows_kept": 677462,
+  "suppression_rate": 0.2887,
+  "porte_indisponivel_rate": 0.1239,
+  "date_min": "2019-01-31",
+  "date_max": "2026-05-31"
+}
