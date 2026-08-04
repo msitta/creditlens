@@ -1,0 +1,10 @@
+data/raw/
+data/processed/*
+!data/processed/*_ingestion_log.json
+.venv/
+__pycache__/
+*.pkl
+.ipynb_checkpoints/
+.claude/
+.vscode/
+local/resumo_projeto_hana.md
