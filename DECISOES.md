@@ -3,11 +3,17 @@
 Cada entrada: o que foi decidido, por quê, e o que faria eu mudar de ideia.
 Decisão sem condição de reversão é palpite bem escrito.
 
+Entrada revista não se apaga: emenda-se, com ponteiro para a nova. O rastro é o ativo.
+
+---
+
 ## 03/08/2026 — Recorte: pessoa jurídica, Paraná, 2019 a 2026
 
 **Por quê:** cabe no prazo de um mês e é o mercado que eu conheço de perto. 2019 dá pré-pandemia como linha de base.
 
 **O que me faria mudar:** se o Paraná mostrar comportamento atípico frente ao Brasil, o recorte vira limitação séria e é necessário declarar isso.
+
+> **Emendada em 20/08/2026:** recorte ampliado para nacional. O denominador do Paraná era pequeno demais para o segmento fintech (0,07% do crédito estadual), e proporção sobre denominador pequeno não é estável — o mesmo raciocínio do piso de 1%.
 
 ---
 
@@ -47,6 +53,14 @@ Saldo em reais é a única das três medidas sem viés conhecido aqui.
 **Como apliquei:** o piso vale para todos os segmentos, não só para o que eu queria excluir. Se derrubasse a fintech, teria que aceitar.
 
 **O que me faria mudar:** se o segmento crescer e passar o piso, ele volta ao gráfico.
+
+---
+
+## Em aberto
+
+**Transição de versão V1→V2 da base.** Se a subida do `porte_indisponivel` na fintech coincidir com a migração metodológica, o achado pode refletir mudança de coleta, e não comportamento de mercado. Teste desenhado: marcar o corte na série e comparar os dois segmentos — se só a fintech se move, a versão não explica o fenômeno. Não publicar conclusão antes disso.
+
+**Movimento inexplicado em julho/2025 na linha de banco.** Enfraquece o argumento do banco como controle imóvel naquele mês específico. Declarado como caveat em aberto, não resolvido.
 
 ---
 
