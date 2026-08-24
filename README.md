@@ -36,7 +36,7 @@ One caveat belongs next to every number above: banks dominate credit in this sta
 
 ## How I got there
 
-Four decisions did most of the work. Each is recorded in [`DECISOES.md`](DECISOES.md) with its rationale and, deliberately, the condition that would reverse it.
+Four decisions did most of the work. Each is recorded in [`DECISIONS.md`](DECISIONS.md) with its rationale and, deliberately, the condition that would reverse it.
 
 - **`-1` is absence, not a value.** In `numero_de_operacoes`, `-1` marks statistical suppression for confidentiality. Averaging over it produces a wrong answer with no visible error. It is treated as missing — and a companion flag records where suppression occurred, because the suppression itself is information: it marks where operations are few.
 - **Measured on `carteira_ativa`, not on row counts.** Counting rows treats a ten-thousand-real operation and a ten-million-real one as equal. `numero_de_operacoes` is incomplete in 28.9% of rows because of suppression, and what is missing is not random — it concentrates in the small cells. Balance in reais is the only one of the three available measures with no known bias here.
@@ -45,7 +45,7 @@ Four decisions did most of the work. Each is recorded in [`DECISOES.md`](DECISOE
 
 ## Open decision
 
-The ceiling for `impacto_1_contrato_pp` — the point above which a month is considered unstable and leaves the chart — is not yet set. The diagnostic that informs it is built and plotted; the value and its rationale still have to be chosen and recorded in `DECISOES.md`.
+The ceiling for `one_contract_impact_pp` — the point above which a month is considered unstable and leaves the chart — is not yet set. The diagnostic that informs it is built and plotted; the value and its rationale still have to be chosen and recorded in `DECISIONS.md`.
 
 ## Next steps
 
@@ -63,7 +63,7 @@ python src/ingest.py
 
 `ingest.py` downloads SCR.data year by year from the Central Bank, filters to corporate borrowers in Paraná, coerces types, and writes a Parquet file to `data/processed/` along with an ingestion log. The raw archives and the processed dataset are not versioned — only the ingestion log is, so the pipeline can be audited without shipping hundreds of megabytes.
 
-Then open `notebooks/01_porte_indisponivel.ipynb`.
+Then open `notebooks/01_missing_size_bracket.ipynb`.
 
 ## Data and licence
 
