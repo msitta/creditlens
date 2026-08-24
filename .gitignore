@@ -9,3 +9,7 @@ __pycache__/
 .vscode/
 local/
 ESTRATEGIA.md
+# Material de apoio: fica no disco, fora do repositorio
+Enunciado.md
+src/*.pdf
+notebooks/agg_pj_pr.csv

@@ -112,17 +112,17 @@ series at that same point is therefore suspect until the break is explained.
 
 ```
 notebooks/01_unavailable_size.ipynb   analysis, end to end
-estilo.py                             chart styling (Synthwave Horizon palette)
-ingest.py                             month-by-month ingestion from SCR.data
-DECISOES.md                           decision log — including rejected hypotheses
+src/style.py                          chart styling (Synthwave Horizon palette)
+src/ingest.py                         month-by-month ingestion from SCR.data
+DECISIONS.md                          decision log — including rejected hypotheses
 requirements.txt                      pinned dependencies
 ```
 
-**`DECISOES.md` is worth reading alongside the analysis.** Every methodological
+**`DECISIONS.md` is worth reading alongside the analysis.** Every methodological
 decision is recorded with its reasoning and — the part that matters — the condition
 that would reverse it. It includes three hypotheses that were tested and did not
 survive, and two cut-off criteria, one of which was discarded before it reached
-production. The log is in Portuguese; an English version is planned.
+production.
 
 ---
 
