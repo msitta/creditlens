@@ -75,16 +75,34 @@ SUPPRESSION_SENTINEL = -1
 
 
 def download_year(year, raw_dir=RAW_DIR):
-    '''Fetch one yearly archive, skipping the download if it is already local.'''
+    '''Fetch one yearly archive, re-fetching when the source has grown.
+
+    Checking existence alone is not enough. The current year's archive grows by
+    one month at a time, so a local copy silently freezes the series at whatever
+    was first downloaded — and nobody notices, because nothing errors. Comparing
+    sizes against the source keeps the series current and also catches a
+    revision of a closed year.
+    '''
     raw_dir.mkdir(parents=True, exist_ok=True)
     target = raw_dir / f'scrdata_{year}.zip'
+    url = BASE_URL.format(year=year)
 
     if target.exists() and target.stat().st_size > 0:
-        print(f'[skip]     {target.name} already present '
-              f'({target.stat().st_size / 1e6:.0f} MB)')
-        return target
+        local = target.stat().st_size
+        try:
+            head = requests.head(url, timeout=60, allow_redirects=True)
+            remote = int(head.headers.get('content-length', 0))
+        except requests.RequestException:
+            remote = 0  # offline or blocked: keep what is on disk
 
-    url = BASE_URL.format(year=year)
+        if remote in (0, local):
+            print(f'[skip]     {target.name} up to date '
+                  f'({local / 1e6:.0f} MB)')
+            return target
+
+        print(f'[stale]    {target.name} is {local:,} bytes, source has '
+              f'{remote:,} — re-fetching')
+
     print(f'[download] {url}')
     with requests.get(url, stream=True, timeout=600) as response:
         response.raise_for_status()
@@ -94,7 +112,6 @@ def download_year(year, raw_dir=RAW_DIR):
 
     print(f'[ok]       {target.name} ({target.stat().st_size / 1e6:.0f} MB)')
     return target
-
 
 # --- read ----------------------------------------------------------------
 
@@ -181,58 +198,92 @@ def coerce_types(frame):
 
 
 def ingest(years=YEARS, uf_keep=UF_KEEP, client_keep=CLIENT_KEEP):
-    '''Run the whole pipeline and return the consolidated frame plus a log.'''
-    frames = []
+    '''Run the whole pipeline and return the output path plus a log.
+
+    Months are written to Parquet as they are read, instead of being held and
+    concatenated at the end. Nationwide the series is ~11M rows, and holding it
+    in memory before writing does not fit on a 10 GB machine. Two consequences,
+    both deliberate:
+
+    - rows are no longer globally sorted by (data_base, modalidade). They come
+      out in file order, which is chronological by month. The analysis groups
+      by month and segment, so order carries no meaning here.
+    - the frame is no longer returned. It would defeat the purpose.
+
+    The old CSV fallback for a missing parquet engine is gone with it: writing
+    incrementally means a failed run keeps everything already written, so there
+    is no longer a long run to lose at the last step.
+    '''
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    stem = f'scrdata_{client_keep.lower()}_{(uf_keep or "br").lower()}'
+    output = OUT_DIR / f'{stem}.parquet'
+
     log = {
-        'uf': uf_keep,
+        'uf': uf_keep or 'BR',
         'cliente': client_keep,
         'months': [],
         'rows_read': 0,
         'rows_kept': 0,
     }
 
-    for year in years:
-        path = download_year(year)
-        with zipfile.ZipFile(path) as archive:
-            members = sorted(
-                name for name in archive.namelist()
-                if name.lower().endswith('.csv'))
-            for member in members:
-                frame, rows_seen = read_member(
-                    archive, member, uf_keep, client_keep)
-                frames.append(coerce_types(frame))
-                log['rows_read'] += rows_seen
-                log['rows_kept'] += len(frame)
-                log['months'].append({
-                    'file': member,
-                    'rows_read': rows_seen,
-                    'rows_kept': len(frame),
-                })
-                print(f'  {member}: {rows_seen:>7,} read -> '
-                      f'{len(frame):>6,} kept')
+    writer = None
+    suppressed = porte_missing = 0
+    date_min = date_max = None
 
-    combined = pd.concat(frames, ignore_index=True)
-    combined = combined.sort_values(['data_base', 'modalidade']) \
-                       .reset_index(drop=True)
-
-    log['suppression_rate'] = round(
-        float(combined['operacoes_suprimidas'].mean()), 4)
-    log['porte_indisponivel_rate'] = round(
-        float(combined['porte_indisponivel'].mean()), 4)
-    log['date_min'] = str(combined['data_base'].min().date())
-    log['date_max'] = str(combined['data_base'].max().date())
-
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    stem = f'scrdata_{client_keep.lower()}_{(uf_keep or "br").lower()}'
     try:
-        output = OUT_DIR / f'{stem}.parquet'
-        combined.to_parquet(output, index=False)
-    except ImportError:
-        # No pyarrow/fastparquet available: keep going with a portable format
-        # rather than losing the whole run at the last step.
-        output = OUT_DIR / f'{stem}.csv.gz'
-        combined.to_csv(output, index=False, compression='gzip')
-        print('[warn]     no parquet engine found, wrote gzipped CSV instead')
+        for year in years:
+            path = download_year(year)
+            with zipfile.ZipFile(path) as archive:
+                members = sorted(
+                    name for name in archive.namelist()
+                    if name.lower().endswith('.csv'))
+                for member in members:
+                    frame, rows_seen = read_member(
+                        archive, member, uf_keep, client_keep)
+                    log['rows_read'] += rows_seen
+                    log['rows_kept'] += len(frame)
+                    log['months'].append({
+                        'file': member,
+                        'rows_read': rows_seen,
+                        'rows_kept': len(frame),
+                    })
+                    print(f'  {member}: {rows_seen:>7,} read -> '
+                          f'{len(frame):>7,} kept')
+
+                    if frame.empty:
+                        continue
+
+                    frame = coerce_types(frame)
+
+                    suppressed += int(frame['operacoes_suprimidas'].sum())
+                    porte_missing += int(frame['porte_indisponivel'].sum())
+                    low, high = frame['data_base'].min(), frame['data_base'].max()
+                    date_min = low if date_min is None or low < date_min else date_min
+                    date_max = high if date_max is None or high > date_max else date_max
+
+                    # Categories carry a per-month dictionary. Writing them as
+                    # strings keeps one stable schema across every row group,
+                    # which is simpler than reconciling dictionaries.
+                    for column in CATEGORY_COLS:
+                        frame[column] = frame[column].astype('string')
+
+                    table = pa.Table.from_pandas(frame, preserve_index=False)
+                    if writer is None:
+                        writer = pq.ParquetWriter(output, table.schema)
+                    writer.write_table(table)
+    finally:
+        if writer is not None:
+            writer.close()
+
+    kept = log['rows_kept'] or 1
+    log['suppression_rate'] = round(suppressed / kept, 4)
+    log['porte_indisponivel_rate'] = round(porte_missing / kept, 4)
+    log['date_min'] = str(date_min.date()) if date_min is not None else None
+    log['date_max'] = str(date_max.date()) if date_max is not None else None
+
     with open(OUT_DIR / f'{stem}_ingestion_log.json', 'w',
               encoding='utf-8') as handle:
         json.dump(log, handle, ensure_ascii=False, indent=2)
@@ -244,7 +295,7 @@ def ingest(years=YEARS, uf_keep=UF_KEEP, client_keep=CLIENT_KEEP):
     print(f'porte missing  : {log["porte_indisponivel_rate"]:.1%}')
     print(f'written        : {output}')
 
-    return combined, log
+    return output, log
 
 
 if __name__ == '__main__':
