@@ -33,7 +33,7 @@ import requests
 # --- configuration -------------------------------------------------------
 
 YEARS = range(2019, 2027)
-UF_KEEP = 'PR'
+UF_KEEP = None          # None = nationwide; 'PR' restores the original state cut
 CLIENT_KEEP = 'PJ'
 
 BASE_URL = 'https://www.bcb.gov.br/pda/desig/scrdata_{year}.zip'
@@ -200,7 +200,7 @@ def ingest(years=YEARS, uf_keep=UF_KEEP, client_keep=CLIENT_KEEP):
             for member in members:
                 frame, rows_seen = read_member(
                     archive, member, uf_keep, client_keep)
-                frames.append(frame)
+                frames.append(coerce_types(frame))
                 log['rows_read'] += rows_seen
                 log['rows_kept'] += len(frame)
                 log['months'].append({
@@ -211,7 +211,7 @@ def ingest(years=YEARS, uf_keep=UF_KEEP, client_keep=CLIENT_KEEP):
                 print(f'  {member}: {rows_seen:>7,} read -> '
                       f'{len(frame):>6,} kept')
 
-    combined = coerce_types(pd.concat(frames, ignore_index=True))
+    combined = pd.concat(frames, ignore_index=True)
     combined = combined.sort_values(['data_base', 'modalidade']) \
                        .reset_index(drop=True)
 
@@ -223,7 +223,7 @@ def ingest(years=YEARS, uf_keep=UF_KEEP, client_keep=CLIENT_KEEP):
     log['date_max'] = str(combined['data_base'].max().date())
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    stem = f'scrdata_{client_keep.lower()}_{uf_keep.lower()}'
+    stem = f'scrdata_{client_keep.lower()}_{(uf_keep or "br").lower()}'
     try:
         output = OUT_DIR / f'{stem}.parquet'
         combined.to_parquet(output, index=False)

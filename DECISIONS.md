@@ -56,6 +56,20 @@ Balance in reais is the only one of the three measures with no known bias here.
 
 ---
 
+## 2026-08-24 — Nationwide scope carried into the code
+
+**Why:** the amendment of 2026-08-20 widened the scope, but the code still carried `UF_KEEP = 'PR'` and the notebook still read the Paraná extract. The decision existed on paper only; the analysis was still one state.
+
+**What changed:** `UF_KEEP = None` in `src/ingest.py`, and the notebook now reads `scrdata_pj_br.parquet`.
+
+**What the change costs:** measured on one month, corporate rows go from 8,272 (Paraná) to 126,914 (nationwide) — a factor of 15.3. Over 89 months that is roughly 11.3 million rows. The ingestion accumulated every month as raw strings before coercing types, which does not fit in the memory available here; types are now coerced month by month, inside the loop. The notebook reads only the six columns the analysis uses.
+
+**What is not yet true:** every figure in the notebook narrative — 1% / 11% / 31%, the bank flat at around 2% — was computed on Paraná. They stay labelled as Paraná until the nationwide series is actually run. Relabelling them without recomputing would be the exact error this log exists to prevent.
+
+**What would change my mind:** if the nationwide run reproduces the same segment pattern, the Paraná cut was representative and the earlier limitation was conservative. If it does not, the earlier reading gets an amendment, not a quiet replacement.
+
+---
+
 ## Open
 
 **V1→V2 source version transition.** If the rise of `porte_indisponivel` in the fintech segment coincides with the methodological migration, the finding may reflect a change in collection rather than market behaviour. Test designed: mark the cut-off on the series and compare the two segments — if only the fintech moves, the version does not explain the phenomenon. Do not publish a conclusion before this.
