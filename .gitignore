@@ -13,3 +13,10 @@ ESTRATEGIA.md
 Enunciado.md
 src/*.pdf
 notebooks/agg_pj_pr.csv
+# scratch
+files/
+files.zip
+dump.py
+saidas.txt
+*.ipynb.bak
+notebooks/*.md
