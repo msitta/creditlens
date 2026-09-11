@@ -1,4 +1,5 @@
-# CreditLens
+# Blind Spot
+<H5> The name is the finding: a field that looks populated, is trusted, and is quietly empty for a growing share of the market.</H5>
 
 **Can you break down Brazilian business credit by company size? For part of the
 market, no — and this is where that stops being true.**

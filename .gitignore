@@ -21,3 +21,6 @@ saidas.txt
 *.ipynb.bak
 notebooks/*.md
 .venv-test/
+*.egg-info/
+build/
+dist/
