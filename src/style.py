@@ -8,9 +8,12 @@ Usage:
 
 The palette and the 60/30/10 rule come from the standardisation manual.
 Segment mapping follows the narrative, not alphabetical order:
-    Bank    -> cyan   (the ordinary metric: the control that does not move)
-    Fintech -> pink   (the high-contrast series: the finding)
-    PI      -> orange (the point of concern: the unstable segment)
+    Banco                    -> cyan   (the reference: barely moves)
+    Fintech                  -> pink   (the high-contrast series: the finding)
+    Instituição de pagamento -> orange, dashed (the unstable segment)
+
+Segment names are the Central Bank's, in Portuguese, and are never translated
+here — see DECISIONS.md, 2026-09-11.
 """
 
 import matplotlib as mpl
@@ -27,13 +30,12 @@ CREAM = '#FEFECC'        # Pastel Cream       — titles, axes
 LAVENDER = '#BB99FF'     # Soft Lavender      — support
 INDIGO = '#4B0082'       # Indigo             — grid
 
-# Accepts the names in both languages: the notebook reads in English, but the
-# source (Banco Central do Brasil) names the segments in Portuguese.
+# Keys are the segment values exactly as SCR.data publishes them. An English
+# alias here would silently accept a name the source never uses.
 SEGMENT_COLORS = {
-    'Banco': CYAN,                'Bank': CYAN,
+    'Banco': CYAN,
     'Fintech': PINK,
     'Instituição de pagamento': ORANGE,
-    'Payment institution': ORANGE,
 }
 
 CYCLE = [CYAN, PINK, ORANGE, YELLOW, LAVENDER]
@@ -85,7 +87,7 @@ def apply():
         'lines.linewidth': 2.0,
         'lines.solid_capstyle': 'round',
 
-        'figure.figsize': (11, 5),
+        'figure.figsize': (10, 5.5),
         'font.size': 10,
     })
 
@@ -132,13 +134,41 @@ def finalize(ax, source_text='', legend=True):
 
 
 def mark(ax, x, text, color=YELLOW):
-    """Vertical annotation line — use for version cut-offs and breaks."""
+    """Vertical annotation line — use for version cut-offs and breaks.
+
+    The label flips to the left of the line when the date falls in the last
+    third of the axis, so it does not run off the right edge.
+    """
     ax.axvline(x, color=color, linestyle='--', linewidth=1.2, alpha=0.8)
-    ax.text(x, ax.get_ylim()[1], f' {text}', color=color,
-            fontsize=8.5, va='top', ha='left')
+
+    left, right = ax.get_xlim()
+    pos = mpl.dates.date2num(x) if hasattr(x, 'toordinal') else float(x)
+    late = (pos - left) / (right - left) > 0.66
+
+    ax.text(x, ax.get_ylim()[1], f'{text} ' if late else f' {text}',
+            color=color, fontsize=8.5, va='top',
+            ha='right' if late else 'left')
 
 
 def source(ax, text):
     """Attribution footer, bottom left corner."""
     ax.annotate(text, xy=(0, -0.13), xycoords='axes fraction',
                 color=LAVENDER, fontsize=8, alpha=0.85)
+
+
+def dash(ax):
+    """Give the orange series a dashed line, after .plot().
+
+    Cyan and orange sit 1.13:1 apart in relative luminance — indistinguishable
+    in greyscale, in print, and for red-green colour blindness. Since those two
+    are the reference and the unstable segment, colour alone cannot carry the
+    distinction. Line style is the redundant channel.
+
+    Matches on colour rather than on column order, so it stays correct when a
+    chart draws more lines than it has columns — as the filtered series does,
+    with the raw series ghosted underneath.
+    """
+    for line in ax.get_lines():
+        if line.get_color() == ORANGE:
+            line.set_linestyle((0, (5, 2)))
+    return ax
