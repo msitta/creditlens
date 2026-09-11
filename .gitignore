@@ -20,3 +20,4 @@ dump.py
 saidas.txt
 *.ipynb.bak
 notebooks/*.md
+.venv-test/

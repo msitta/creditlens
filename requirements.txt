@@ -1,9 +1,24 @@
-# Ingestion pipeline (src/ingest.py)
+# Direct dependencies only, pinned to the versions the analysis was run on.
+# Transitive dependencies are resolved by the installer rather than frozen here:
+# a full `pip freeze` records an environment, not a project, and makes it
+# impossible to see what the project actually needs.
+#
+# The package itself is installed separately and in editable mode:
+#     uv pip install -e .
+# which puts src/ on the path so `import style` works from any directory.
+
+# analysis
 pandas==3.0.3
 numpy==2.4.6
+
+# charts
+matplotlib==3.11.0
+
+# Parquet read/write (pandas engine)
 pyarrow==25.0.0
+
+# ingestion: downloads the annual archives from the Central Bank
 requests==2.34.2
 
-# Analysis notebook (notebooks/)
-matplotlib==3.11.0
+# running the notebook
 ipykernel==7.3.0
