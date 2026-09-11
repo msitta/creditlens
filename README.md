@@ -141,6 +141,11 @@ Tightening the threshold costs months and *steepens* the slope. There is no
 setting at which the rise disappears, which is the only reason to trust any of
 them.
 
+**The charts do not rely on colour alone.** Two of the three series sit 1.13:1
+apart in relative luminance, so they would be one line in greyscale or for a
+reader with red-green colour blindness. Line style carries the distinction as
+well as colour does.
+
 ---
 
 ## What was ruled out
