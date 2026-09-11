@@ -253,10 +253,16 @@ comparing its 6.4% against a commercial lender's.
 ## What is in this repository
 
 ```
-notebooks/01_unavailable_size.ipynb   analysis, end to end
-src/style.py                          chart styling (Synthwave Horizon palette)
-src/ingest.py                         month-by-month ingestion from SCR.data
 DECISIONS.md                          decision log — including rejected hypotheses
+notebooks/01_unavailable_size.ipynb   analysis, end to end
+src/ingest.py                         month-by-month ingestion from SCR.data
+src/style.py                          chart styling (Synthwave Horizon palette)
+docs/                                 the Central Bank's methodology PDFs, with
+                                      their download dates and MD5 hashes — the
+                                      source is revised in place, so the version
+                                      the argument rests on is pinned here
+archive/                              superseded work, kept and pointed forward
+                                      rather than deleted
 pyproject.toml                        project metadata and direct dependencies
 requirements.txt                      the same dependencies, pinned
 ```
