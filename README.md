@@ -215,26 +215,27 @@ The eight segments are groupings the Central Bank builds from each institution's
 registered licence type. The mapping below is transcribed from the SCR.data
 methodology, not paraphrased from general knowledge:
 
-| Segmento | Licence types grouped into it |
-|---|---|
-| `Banco` | Banco Múltiplo, Banco Comercial, Banco de Investimento, Banco de Câmbio, Banco Múltiplo Cooperativo, Banco Comercial Estrangeiro, plus Banco do Brasil and Caixa Econômica Federal, each named individually |
-| `Cooperativa` | Cooperativa de Crédito — credit unions |
-| `Desenvolvimento/Fomento` | BNDES, Banco de Desenvolvimento, Agência de Fomento — the national development bank and the state-level development banks and agencies |
-| `Financeira` | Sociedade de Crédito, Financiamento e Investimento (SCFI) — consumer credit companies |
-| `Arrendamento` | Sociedade de Arrendamento Mercantil — leasing companies |
-| `Fintech` | Sociedade de Crédito Direto (SCD) and Sociedade de Empréstimo entre Pessoas (SEP) |
-| `Instituição de pagamento` | Payment institutions |
-| `Outros` | Associação de Poupança e Empréstimo, Companhia Hipotecária, Sociedade de Crédito ao Microempreendedor, and securities brokers and dealers (Sociedade Corretora / Distribuidora de TVM) |
+| Segmento | Licence types (as registered) | What these institutions do |
+|---|---|---|
+| `Banco` | Banco Múltiplo, Banco Comercial, Banco de Investimento, Banco de Câmbio, Banco Múltiplo Cooperativo, Banco Comercial Estrangeiro; Banco do Brasil and Caixa Econômica Federal are named individually | Full-licence banks, including the two federally controlled ones |
+| `Cooperativa` | Cooperativa de Crédito | Credit unions |
+| `Desenvolvimento/Fomento` | BNDES, Banco de Desenvolvimento, Agência de Fomento | The national development bank and the state-level development banks and agencies; they lend on policy mandates rather than on commercial underwriting |
+| `Financeira` | Sociedade de Crédito, Financiamento e Investimento (SCFI) | Consumer finance companies; no deposit-taking |
+| `Arrendamento` | Sociedade de Arrendamento Mercantil | Leasing companies |
+| `Fintech` | Sociedade de Crédito Direto (SCD), Sociedade de Empréstimo entre Pessoas (SEP) | Digital-only credit licences created in 2018: an SCD lends its own capital, an SEP matches lenders to borrowers |
+| `Instituição de pagamento` | Instituição de Pagamento | Payment institutions authorised to extend credit |
+| `Outros` | Associação de Poupança e Empréstimo, Companhia Hipotecária, Sociedade de Crédito ao Microempreendedor, Sociedade Corretora e Distribuidora de TVM | Savings and loan associations, mortgage companies, microcredit companies, and securities brokers and dealers |
+
+Licence names are left in Portuguese for the same reason the segment values are:
+they are what the institution is registered as, not a description of it. The third
+column carries the meaning.
 
 Two of these matter for reading the finding.
 
-`Fintech` is a regulatory category, not a marketing label. It covers the two
-licences created by CMN Resolution 4.656/2018 for digital-only credit: an **SCD**
-lends its own capital through an electronic platform and cannot take deposits; an
-**SEP** runs peer-to-peer lending, matching lenders to borrowers without lending
-its own capital. A digital bank holding a banking licence is not in this segment —
-it reports as `Banco`. So this segment is narrower than what the press calls a
-fintech, which is part of why it is small.
+`Fintech` is a regulatory category, not a marketing label — the two licences come
+from CMN Resolution 4.656/2018. A digital bank holding a banking licence is **not**
+in this segment; it reports as `Banco`. So the segment is much narrower than what
+the press calls a fintech, which is part of why it is small.
 
 `Desenvolvimento/Fomento` is dominated by BNDES, the national development bank. It
 is the second-largest segment by outstanding credit and it lends on policy
